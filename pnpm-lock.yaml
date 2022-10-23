@@ -1,0 +1,12 @@
+lockfileVersion: 5.4
+
+importers:
+
+  .:
+    specifiers:
+      js-functional: workspace:*
+    dependencies:
+      js-functional: link:js-functional
+
+  js-functional:
+    specifiers: {}

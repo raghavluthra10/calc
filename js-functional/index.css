@@ -1,0 +1,58 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+body {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.appTitleContainer {
+   width: 350px;
+   padding: 10px;
+   margin-top: 120px;
+   /* border: 1px black solid; */
+   display: flex;
+}
+
+.appTitle {
+   flex: 1;
+}
+
+.todosContainer {
+   width: 350px;
+   margin-top: 40px;
+   padding: 10px;
+   border-radius: 10px;
+   border: 1px black solid;
+}
+
+.todosForm {
+   display: flex;
+}
+
+.todosInput {
+   flex: 1;
+}
+
+.todosList {
+   margin-top: 16px;
+   display: flex;
+   flex-direction: column;
+}
+
+.todoItem {
+   margin-bottom: 8px;
+   display: flex;
+}
+
+.taskTitle {
+   flex: 1;
+   margin-left: 4px;
+}
+
+.editTask {
+   margin-right: 4px;
+}
