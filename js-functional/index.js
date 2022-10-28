@@ -1,40 +1,39 @@
+// import { v4 as uuidv4 } from "uuid";
+import { randomName } from "./controllers/temp.js";
+import { changeTheme } from "./controllers/changeTheme.js";
+// const uuid = require("uuid");
+
 const theme = document.getElementById("changeTheme");
+const todosForm = document.querySelector(".todosForm");
+const tempBtn = document.querySelector(".tempBtn");
 
-theme.addEventListener("click", () => {
-   const root = document.querySelector(":root");
-   const rootStyle = getComputedStyle(root);
-   const lightThemeColor = rootStyle
-      .getPropertyValue("--light-bg")
-      .substring(1);
-   let containerDiv = document.querySelector(".container");
-   let containerDivBgColor = getComputedStyle(containerDiv).backgroundColor;
+tempBtn.addEventListener("click", randomName);
 
-   let todosContainer = document.querySelector(".todosContainer");
-   let todoItem = document.querySelectorAll(".todoItem");
+const tasksArray = [
+   {
+      complete: true,
+      title: "the is random task",
+      id: 1,
+   },
+   {
+      complete: false,
+      title: "the is dhuishdies task",
+      id: 2,
+   },
+];
 
-   function changeThemeToLight() {
-      containerDiv.style.backgroundColor = "var(--light-bg)";
-      todosContainer.style.backgroundColor = "var(--light-primary-color)";
+function addFunction(e) {
+   e.preventDefault();
+   const inputValue = document.querySelector(".todosInput").value;
 
-      for (let i = 0; i < todoItem.length; i++) {
-         todoItem[i].style.backgroundColor = "var(--light-secondary-color)";
-      }
-   }
+   const _input = {
+      inputValue,
+      // id: uuidv4,
+      complete: false,
+   };
+   console.log(_input);
+}
 
-   function changeThemeToDark() {
-      containerDiv.style.backgroundColor = "var(--dark-bg)";
-      todosContainer.style.backgroundColor = "var(--dark-primary-color)";
+todosForm.addEventListener("submit", addFunction);
 
-      for (let i = 0; i < todoItem.length; i++) {
-         todoItem[i].style.backgroundColor = "var(--dark-secondary-color)";
-      }
-   }
-   if (lightThemeColor === containerDivBgColor) {
-      console.log(lightThemeColor, containerDivBgColor);
-      changeThemeToDark();
-   } else {
-      // change theme to light
-      console.log(lightThemeColor, containerDivBgColor, "hfuydr");
-      changeThemeToLight();
-   }
-});
+theme.addEventListener("click", changeTheme);

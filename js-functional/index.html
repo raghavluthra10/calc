@@ -7,7 +7,7 @@
 
       <title>JS functional</title>
       <link rel="stylesheet" href="index.css" />
-      <script src="index.js" async></script>
+      <script type="module" src="./index.js"></script>
    </head>
    <body>
       <div class="container">
@@ -18,8 +18,12 @@
 
          <div class="todosContainer">
             <form class="todosForm">
-               <input class="todosInput" placeholder="Add a Todo..." />
-               <button type="submit">Add</button>
+               <input
+                  type="text"
+                  class="todosInput"
+                  placeholder="Add a Todo..."
+               />
+               <button type="submit" class="addTaskButton">Add</button>
             </form>
 
             <div class="todosList">
@@ -36,6 +40,7 @@
                   <button id="deleteTask">Delete</button>
                </div>
             </div>
+            <button class="tempBtn">temp</button>
          </div>
       </div>
    </body>
