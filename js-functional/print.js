@@ -1,3 +1,3 @@
 export default function printMe() {
-   console.log("I get called from printdds!");
+   console.log("I get called from prints!");
 }
