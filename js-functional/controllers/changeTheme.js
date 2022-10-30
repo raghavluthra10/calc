@@ -28,11 +28,9 @@ export const changeTheme = () => {
       }
    }
    if (lightThemeColor === containerDivBgColor) {
-      console.log(lightThemeColor, containerDivBgColor);
       changeThemeToDark();
    } else {
       // change theme to light
-      console.log(lightThemeColor, containerDivBgColor, "hfuydr");
       changeThemeToLight();
    }
 };

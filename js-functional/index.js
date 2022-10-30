@@ -1,13 +1,10 @@
-// import { v4 as uuidv4 } from "uuid";
-import { randomName } from "./controllers/temp.js";
+import { nanoid } from "nanoid";
+// const nanoid = require("nanoid");
 import { changeTheme } from "./controllers/changeTheme.js";
-// const uuid = require("uuid");
 
 const theme = document.getElementById("changeTheme");
 const todosForm = document.querySelector(".todosForm");
 const tempBtn = document.querySelector(".tempBtn");
-
-tempBtn.addEventListener("click", randomName);
 
 const tasksArray = [
    {
@@ -28,7 +25,8 @@ function addFunction(e) {
 
    const _input = {
       inputValue,
-      // id: uuidv4,
+      id: nanoid(),
+
       complete: false,
    };
    console.log(_input);
