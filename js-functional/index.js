@@ -1,15 +1,19 @@
 import { nanoid } from "nanoid";
-// const nanoid = require("nanoid");
 import { changeTheme } from "./controllers/changeTheme.js";
+import printMe from "./print.js";
+import "./index.css";
 
 const theme = document.getElementById("changeTheme");
 const todosForm = document.querySelector(".todosForm");
 const tempBtn = document.querySelector(".tempBtn");
 
+tempBtn.addEventListener("click", printMe);
+
 const tasksArray = [
    {
       complete: true,
       title: "the is random task",
+
       id: 1,
    },
    {
