@@ -6,8 +6,7 @@ import "./index.css";
 const theme = document.getElementById("changeTheme");
 const todosForm = document.querySelector(".todosForm");
 const tempBtn = document.querySelector(".tempBtn");
-
-tempBtn.addEventListener("click", printMe);
+const todosList = document.querySelector(".todosList");
 
 const tasksArray = [
    {
@@ -22,6 +21,20 @@ const tasksArray = [
       id: 2,
    },
 ];
+
+function showAllTasks() {
+   const _tasks = tasksArray.map(function (task) {
+      return `<div class="todoItem" id="${task.id}" >
+      <input type="checkbox" ${task.complete && "checked"} id="todoTask"  />
+      <label for="todoTask" class="taskTitle">${task.title}</label>
+      <button id="editTask" class="editTask">Edit</button>
+      <button id="deleteTask">Delete</button>
+   </div>`;
+   });
+   todosList.innerHTML = _tasks.join("");
+}
+
+showAllTasks();
 
 function addFunction(e) {
    e.preventDefault();
