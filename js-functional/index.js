@@ -3,13 +3,21 @@ import { changeTheme } from "./controllers/changeTheme.js";
 import printMe from "./print.js";
 import "./index.css";
 
+const inputModeEnum = {
+   0: "normal_mode",
+   1: "edit_mode",
+};
+
+let currentInputMode = inputModeEnum[0];
+
 window.addEventListener("load", () => {
    const theme = document.getElementById("changeTheme");
    const todosForm = document.querySelector(".todosForm");
    const todosList = document.querySelector(".todosList");
-   // const deleteBtn = document.getElementsByClassName("deleteTask");
+   const inputValue = document.querySelector(".todosInput");
+   const formButtonValue = todosForm.children[1];
 
-   const temp = document.querySelector(".tempBtn");
+   let editModeId = "";
 
    theme.addEventListener("click", changeTheme);
 
@@ -48,7 +56,6 @@ window.addEventListener("load", () => {
       });
 
       todosList.innerHTML = _task.join("");
-      console.log(todosList);
 
       // delete task action
       const deleteBtn = document.querySelectorAll(".deleteTask");
@@ -58,7 +65,6 @@ window.addEventListener("load", () => {
             const parentElement = deleteBtn[i].parentElement;
 
             const taskId = parentElement.id;
-            console.log(taskId);
 
             const updateTaskAfterDelete = tasksArray.filter((ta) => {
                return ta.id != taskId;
@@ -69,25 +75,71 @@ window.addEventListener("load", () => {
             parentElement.remove();
          });
       }
+
+      // edit task action
+      const editBtn = document.querySelectorAll(".editTask");
+
+      for (let i = 0; i < editBtn.length; i++) {
+         editBtn[i].addEventListener("click", function (e) {
+            formButtonValue.innerHTML = "Done";
+            const parentElement = editBtn[i].parentElement;
+            const taskId = parentElement.id;
+            const taskTitle =
+               parentElement.querySelector(".taskTitle").innerHTML;
+
+            inputValue.value = taskTitle;
+
+            currentInputMode = inputModeEnum[1];
+
+            editModeId = taskId;
+            // now since editmode is on, addTask functions "IF" statement will take care of it
+         });
+      }
    }
 
    showAllTasks(tasksArray);
 
    function addTask(e) {
       e.preventDefault();
-      let inputValue = document.querySelector(".todosInput");
 
-      const _input = {
-         title: inputValue.value,
-         id: nanoid(),
-         stamp: new Date(),
-         complete: false,
-      };
+      if (currentInputMode == inputModeEnum[0]) {
+         const _input = {
+            title: inputValue.value,
+            id: nanoid(),
+            stamp: new Date(),
+            complete: false,
+         };
 
-      tasksArray.push(_input);
-      showAllTasks(tasksArray);
-      inputValue.value = "";
-      return;
+         tasksArray.push(_input);
+         showAllTasks(tasksArray);
+         inputValue.value = "";
+         return;
+      } else if (currentInputMode == inputModeEnum[1]) {
+         const currentTodoValue = inputValue.value;
+
+         let updatedTask = {};
+
+         for (let i = 0; i < tasksArray.length; i++) {
+            if (tasksArray[i].id == editModeId) {
+               updatedTask = tasksArray[i];
+               updatedTask.title = currentTodoValue;
+            }
+         }
+
+         const updatedArray = tasksArray.filter((t) => {
+            return t.id != editModeId;
+         });
+
+         updatedArray.push(updatedTask);
+
+         tasksArray = [...updatedArray];
+
+         showAllTasks(tasksArray);
+         currentInputMode = inputModeEnum[0];
+         formButtonValue.innerHTML = "Add";
+         inputValue.value = "";
+         return;
+      }
    }
 
    todosForm.addEventListener("submit", addTask);
