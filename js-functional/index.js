@@ -12,18 +12,31 @@ const tasksArray = [
    {
       complete: true,
       title: "the is random task",
-
+      stamp: new Date(),
       id: 1,
    },
    {
       complete: false,
       title: "the is dhuishdies task",
+      stamp: new Date(),
       id: 2,
    },
 ];
 
 function showAllTasks() {
-   const _tasks = tasksArray.map(function (task) {
+   const sortTasksArray = tasksArray.sort((a, b) => {
+      if (a.stamp > b.stamp) {
+         return -1;
+      }
+
+      if (b.stamp > a.stamp) {
+         return 1;
+      }
+
+      return 0;
+   });
+
+   const _tasks = sortTasksArray.map(function (task) {
       return `<div class="todoItem" id="${task.id}" >
       <input type="checkbox" ${task.complete && "checked"} id="todoTask"  />
       <label for="todoTask" class="taskTitle">${task.title}</label>
@@ -36,19 +49,24 @@ function showAllTasks() {
 
 showAllTasks();
 
-function addFunction(e) {
+function addTask(e) {
    e.preventDefault();
-   const inputValue = document.querySelector(".todosInput").value;
+   let inputValue = document.querySelector(".todosInput");
 
    const _input = {
-      inputValue,
+      title: inputValue.value,
       id: nanoid(),
-
+      stamp: new Date(),
       complete: false,
    };
-   console.log(_input);
+
+   tasksArray.push(_input);
+   showAllTasks();
+   inputValue.value = "";
+   console.log(tasksArray);
+   return;
 }
 
-todosForm.addEventListener("submit", addFunction);
+todosForm.addEventListener("submit", addTask);
 
 theme.addEventListener("click", changeTheme);
