@@ -39,6 +39,14 @@ importers:
       express: 4.18.2
       nodemon: 2.0.20
 
+  js-oop/server:
+    specifiers:
+      express: ^4.18.2
+      nodemon: ^2.0.20
+    dependencies:
+      express: 4.18.2
+      nodemon: 2.0.20
+
 packages:
 
   /@discoveryjs/json-ext/0.5.7:

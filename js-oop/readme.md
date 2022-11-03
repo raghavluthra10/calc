@@ -1,0 +1,5 @@
+- make a client and server folder
+- root dir of js-oop will have a package.json and so do the client and server folder
+- use OOP paradigm in the entire project
+- for db use pg
+- backend framework will be express
